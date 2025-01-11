@@ -226,6 +226,42 @@ app.get('/api/characters', async (req, res) => {
   }
 })
 
+// Dream Analysis endpoint
+app.post('/api/analyze-dream', async (req, res) => {
+  const { dream, analysisType } = req.body;
+  
+  try {
+    let prompt;
+    if (analysisType === 'psycho') {
+      prompt = `As a professional psychoanalyst, provide a detailed psychological analysis of the following dream, considering unconscious desires, repressed emotions, and symbolic meanings from a psychoanalytic perspective. Dream: "${dream}"`;
+    } else {
+      prompt = `As a dream interpreter, analyze this dream's symbolism, meaning, and potential messages for the dreamer. Consider universal dream symbols, personal context, and emotional significance. Dream: "${dream}"`;
+    }
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content: "You are an experienced dream analyst with expertise in both psychological interpretation and symbolic dream analysis."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+    });
+
+    res.json({ 
+      analysis: completion.choices[0].message.content
+    });
+
+  } catch (error) {
+    console.error('Dream analysis error:', error);
+    res.status(500).json({ error: 'Failed to analyze dream' });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
