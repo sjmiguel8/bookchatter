@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Navbar() {
   return (
     <nav className="navbar">
@@ -16,10 +18,10 @@ function Navbar() {
         <span style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Book Companion</span>
       </div>
       <ul className="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/products">Products</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/products">Products</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
       </ul>
     </nav>
   )
