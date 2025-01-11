@@ -1,5 +1,7 @@
 const config = {
-  apiUrl: 'https://bookchatter.onrender.com',
+  apiUrl: import.meta.env.PROD 
+    ? 'https://bookchatter.onrender.com'  // Production URL
+    : 'http://localhost:5001',            // Development URL
   version: '1.0.1'
 };
 
