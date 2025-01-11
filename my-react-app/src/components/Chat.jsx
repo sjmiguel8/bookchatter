@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import config from '../config'
 
 function Chat({ character }) {
   const [messages, setMessages] = useState([])
@@ -8,7 +9,7 @@ function Chat({ character }) {
     if (!input.trim()) return
     
     try {
-      const response = await fetch('http://localhost:5001/api/chat', {
+      const response = await fetch(`${config.apiUrl}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

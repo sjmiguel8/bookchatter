@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Chat from '../components/Chat'
+import config from '../config'
 
 function Products() {
   const [selectedCharacter, setSelectedCharacter] = useState(null)
@@ -8,10 +9,11 @@ function Products() {
   useEffect(() => {
     // Fetch characters from backend
     const fetchCharacters = async () => {
+      console.log('Fetching from URL:', `${config.apiUrl}/api/characters`)
       try {
-        const response = await fetch('http://localhost:5001/api/characters')
+        const response = await fetch(`${config.apiUrl}/api/characters`)
         const data = await response.json()
-        console.log('Fetched characters:', data) // Debug log
+        console.log('All characters loaded:', data.map(c => c.name))
         setCharacters(data)
       } catch (error) {
         console.error('Error fetching characters:', error)
@@ -27,6 +29,7 @@ function Products() {
       
       {!selectedCharacter ? (
         <div className="character-grid">
+          {console.log('Characters being mapped:', characters)}
           {characters.map(char => (
             <div key={char._id} className="character-select-card" onClick={() => setSelectedCharacter(char)}>
               <div className="character-avatar">
