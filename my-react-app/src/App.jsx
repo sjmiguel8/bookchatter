@@ -64,7 +64,7 @@ function App() {
                     <div className="step-card">
                       <div className="step-number">3</div>
                       <h3>Start Chatting</h3>
-                      <p>Engage in meaningful conversations based on the character's perspective</p>
+                      <p>Engage in meaningful conversations based on the character&apos;s perspective</p>
                     </div>
                   </div>
                 </section>
